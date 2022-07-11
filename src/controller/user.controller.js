@@ -1,4 +1,4 @@
-const { createUser, getUserInfo } = require('../service/user.service')
+const { createUser, getUserInfo, updateById } = require('../service/user.service')
 const { userRegisterError } = require('../constant/err.type')
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require('../config/config.default')
@@ -45,6 +45,13 @@ class UserController {
             ctx.app.emit('error', userRegisterError, ctx)
         }
     }
+
+    async changePassword(ctx, next) {
+        const id = ctx.state.user.id
+        const password = ctx.request.body.password
+        await updateById({ id, password })
+    }
+
 }
 
 module.exports = new UserController()

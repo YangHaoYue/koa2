@@ -37,7 +37,7 @@ class UserController {
                 code: 0,
                 message: '登陆成功',
                 result: {
-                    token: jwt.sign(resUser, JWT_SECRET, { expiresIn: '1d' }),
+                    token: jwt.sign(resUser, JWT_SECRET, { expiresIn: '1h' }),
                 }
             }
         } catch (error) {
@@ -49,7 +49,19 @@ class UserController {
     async changePassword(ctx, next) {
         const id = ctx.state.user.id
         const password = ctx.request.body.password
-        await updateById({ id, password })
+        if (await updateById({ id, password })) {
+            ctx.body = {
+                code: 0,
+                message: '修改密码成功',
+                result: ''
+            }
+        } else {
+            ctx.body = {
+                code: 10007,
+                message: '修改密码错误',
+                result: ''
+            }
+        }
     }
 
 }

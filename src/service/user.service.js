@@ -27,12 +27,14 @@ class UserService {
         const whereOpt = { id }
         const newUser = {}
 
-        user_name && Object.assign({ user_name })
-        password && Object.assign({ password })
-        is_admin && Object.assign({ is_admin })
+        user_name && Object.assign(newUser, { user_name })
+        password && Object.assign(newUser, { password })
+        is_admin && Object.assign(newUser, { is_admin })
 
+        console.log(newUser);
         const res = await User.update(newUser, { where: whereOpt })
-        console.log(res);
+            // console.log(res);
+        return res[0] > 0 ? true : false
     }
 }
 

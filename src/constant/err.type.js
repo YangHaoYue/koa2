@@ -38,5 +38,10 @@ module.exports = {
         code: '10101',
         message: '无效的token',
         result: ''
+    },
+    hadNotAdminPermission: {
+        code: '10103',
+        message: '没有管理员权限',
+        result: ''
     }
 }

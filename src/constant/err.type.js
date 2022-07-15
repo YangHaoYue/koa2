@@ -43,5 +43,15 @@ module.exports = {
         code: '10103',
         message: '没有管理员权限',
         result: ''
+    },
+    fileUploadError: {
+        code: '10201',
+        message: '图片上传失败',
+        result: ''
+    },
+    unSupportedFileType: {
+        code: '10202',
+        message: '不支持此类型文件上传',
+        result: ''
     }
 }

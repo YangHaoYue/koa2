@@ -3,7 +3,7 @@ const { JWT_SECRET } = require('../config/config.default')
 const { tokenExpiredError, invalidToken, hadNotAdminPermission } = require('../constant/err.type')
 
 const auth = async(ctx, next) => {
-    const { authorization } = ctx.request.header
+    const { authorization = "" } = ctx.request.header
     const token = authorization.replace('Bearer ', "")
 
     try {
@@ -35,6 +35,8 @@ const hadAdminPermission = async(ctx, next) => {
         console.error('该用户没有管理员权限', ctx.state.user);
         return ctx.app.emit('error', hadNotAdminPermission, ctx)
     }
+
+    next()
 }
 
 module.exports = {
